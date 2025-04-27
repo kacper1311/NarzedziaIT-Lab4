@@ -19,4 +19,11 @@ elif [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     echo "--logs, -l   - tworzy 100 plików logów"
     echo "--logs N, -l N - tworzy N plików logów"
     echo "--help, -h   - wyświetla pomoc"
+elif [ "$1" = "--init" ]; then
+    repo_url=$(git remote get-url origin)
+    git clone "$repo_url" .
+    echo "export PATH=\$PATH:$(pwd)" >> ~/.zshrc
+    echo "export PATH=\$PATH:$(pwd)" >> ~/.bash_profile
+    source ~/.zshrc 2>/dev/null || source ~/.bash_profile 2>/dev/null
+    echo "Repozytorium sklonowane i ścieżka dodana do PATH"
 fi
