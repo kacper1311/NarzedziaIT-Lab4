@@ -29,4 +29,16 @@ elif [ "$1" = "--init" ]; then
     echo "export PATH=\$PATH:$(pwd)" >> ~/.bash_profile
     source ~/.zshrc 2>/dev/null || source ~/.bash_profile 2>/dev/null
     echo "Repozytorium sklonowane i ścieżka dodana do PATH"
+elif [ "$1" = "--error" ] || [ "$1" = "-e" ]; then
+    count=100
+    if [ -n "$2" ]; then
+        count=$2
+    fi
+    
+    for i in $(seq 1 $count); do
+        mkdir -p "error$i"
+        echo "error$i.txt" > "error$i/error$i.txt"
+        echo "Utworzony przez skrypt.sh" >> "error$i/error$i.txt"
+        echo "Data: $(date)" >> "error$i/error$i.txt"
+    done
 fi
